@@ -1,0 +1,53 @@
+---
+- name: install required packages
+  yum:
+    name:
+      - wget
+      - open-vm-tools
+      - vim
+    state: present
+
+- name: Add ansible user
+  user:
+    name: "{{ ansible_user }}"
+    create_home: true
+    group: wheel
+    password: "{{ ansible_user_password }}"
+    shell: /bin/bash
+    state: present
+    update_password: always
+
+- name: Add ansible user public key
+  authorized_key:
+    user: "{{ ansible_user }}"
+    key: "{{ ansible_user_public_key }}"
+    manage_dir: true
+    comment: ansible
+    exclusive: true
+    state: present
+  when: ansible_user_ssh_public_key != ""
+    
+- name: Add ansible user to sudo
+  lineinfile:
+    path: "/etc/sudoers.d/{{ ansible_user }}"
+    line: "{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL"
+    state: present
+    mode: 0440
+    create: yes
+    validate: 'visudo -cf %s'
+  when: allow_password_less_sudo
+
+- name: Set includedir in sudoers
+  lineinfile:
+    dest: /etc/sudoers
+    line: "#includedir /etc/sudoers.d"
+    state: present
+    validate: "/usr/sbin/visudo -cf %s"
+  when: allow_password_less_sudo
+
+- name: Check ssh config
+  lineinfile:
+    dest: /etc/ssh/sshd.config
+    line: "PubkeyAuthentication yes"
+    state: present
+  notify: "Restart sshd"

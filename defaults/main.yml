@@ -1,0 +1,5 @@
+---
+bootstrap_ansible_user: ansible
+bootstrap_ansible_user_password: ansible
+bootstrap_ansible_user_ssh_public_key: ""
+bootstrap_ansible_allow_password_less_sudo: true
