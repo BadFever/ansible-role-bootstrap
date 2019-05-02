@@ -14,7 +14,7 @@
     name: "{{ bootstrap_ansible_user }}"
     create_home: true
     group: wheel
-    password: "{{ bootstrap_ansible_user_password }}"
+    password: "{{ bootstrap_ansible_user_password | password_hash('sha512') }}"
     shell: /bin/bash
     state: present
     update_password: always
@@ -59,6 +59,6 @@
 - name: Ensue sshd started
   service:
     name: sshd
-    enable: true
+    enabled: true
     state: started
   become: true
