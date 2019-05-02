@@ -4,8 +4,10 @@
     name:
       - wget
       - open-vm-tools
+      - openssh-server
       - vim
     state: present
+  become: true
 
 - name: Add ansible user
   user:
@@ -36,6 +38,7 @@
     create: true
     validate: 'visudo -cf %s'
   when: bootstrap_ansible_allow_password_less_sudo
+  become: true
 
 - name: Set includedir in sudoers
   lineinfile:
@@ -44,6 +47,7 @@
     state: present
     validate: "/usr/sbin/visudo -cf %s"
   when: bootstrap_ansible_allow_password_less_sudo
+  become: true
 
 - name: Check ssh config
   lineinfile:
@@ -51,3 +55,10 @@
     line: "PubkeyAuthentication yes"
     state: present
   notify: "Restart sshd"
+
+- name: Ensue sshd started
+  service:
+    name: sshd
+    enable: true
+    state: started
+  become: true
