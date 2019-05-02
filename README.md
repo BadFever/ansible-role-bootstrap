@@ -15,25 +15,25 @@ Available variables are listed below, along with default values (see defaults/ma
 The ansible service user.
 
 ```yaml
-ansible_user: ansible
+bootstrap_ansible_user: ansible
 ```
 
 The ansible service user password:
 
 ```yaml
-ansible_user_password: "ansible"
+bootstrap_ansible_user_password: "ansible"
 ```
 
 The ansible service user ssh public key.
 
 ```yaml
-ansible_user_ssh_public_key: ""
+bootstrap_ansible_user_ssh_public_key: ""
 ```
 
 Allow passwordless sudo for ansible service user.
 
 ```yaml
-allow_password_less_sudo: true
+bootstrap_ansible_allow_password_less_sudo: true
 ```
 
 ## Dependencies
