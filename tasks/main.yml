@@ -3,7 +3,6 @@
   yum:
     name:
       - wget
-      - open-vm-tools
       - openssh-server
       - vim
     state: present
@@ -54,7 +53,7 @@
     state: present
   notify: "Restart sshd"
 
-- name: Ensue sshd started
+- name: Ensure sshd started
   service:
     name: sshd
     enabled: true
