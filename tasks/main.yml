@@ -47,7 +47,7 @@
 
 - name: Check ssh config
   lineinfile:
-    dest: /etc/ssh/sshd.config
+    dest: /etc/ssh/sshd_config
     line: "PubkeyAuthentication yes"
     state: present
   notify: "Restart sshd"
