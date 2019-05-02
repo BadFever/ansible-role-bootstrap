@@ -24,7 +24,7 @@
     comment: ansible
     exclusive: true
     state: present
-  when: bootstrap_ansible_user_ssh_public_key | length == 0
+  when: bootstrap_ansible_user_ssh_public_key | length > 0
 
 - name: Add ansible user to sudo
   lineinfile:
