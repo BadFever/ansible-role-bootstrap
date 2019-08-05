@@ -12,8 +12,10 @@
   user:
     name: "{{ bootstrap_ansible_user }}"
     create_home: true
-    group: wheel
+    groups:
+      - wheel
     shell: /bin/bash
+    append: true
     state: present
 
 - name: Add ansible user public key
