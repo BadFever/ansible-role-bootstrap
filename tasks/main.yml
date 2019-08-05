@@ -12,6 +12,7 @@
   user:
     name: "{{ bootstrap_ansible_user }}"
     create_home: true
+    local: true
     groups:
       - wheel
     shell: /bin/bash
