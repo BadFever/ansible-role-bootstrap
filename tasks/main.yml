@@ -17,6 +17,7 @@
     shell: /bin/bash
     append: true
     state: present
+  become: true
 
 - name: Add ansible user public key
   authorized_key:
@@ -27,6 +28,7 @@
     exclusive: true
     state: present
   when: bootstrap_ansible_user_ssh_public_key | length > 0
+  become: true
 
 - name: Add ansible user to sudo
   lineinfile:
