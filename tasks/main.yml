@@ -38,7 +38,7 @@
     mode: 0440
     create: true
     validate: 'visudo -cf %s'
-  when: bootstrap_ansible_allow_password_less_sudo
+  when: bootstrap_ansible_allow_password_less_sudo | bool
   become: true
 
 - name: Set includedir in sudoers
@@ -47,7 +47,7 @@
     line: "#includedir /etc/sudoers.d"
     state: present
     validate: "/usr/sbin/visudo -cf %s"
-  when: bootstrap_ansible_allow_password_less_sudo
+  when: bootstrap_ansible_allow_password_less_sudo | bool
   become: true
 
 - name: Check ssh config
