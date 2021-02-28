@@ -4,4 +4,3 @@
     name: sshd
     state: restarted
     enabled: true
-  become: true

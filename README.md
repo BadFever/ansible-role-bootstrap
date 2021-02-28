@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/BadFever/ansible-role-bootstrap.svg?branch=master)](https://travis-ci.org/BadFever/ansible-role-bootstrap)
 
-This ansible roles bootstraps all servers used within ansible configuration management.
+This ansible roles bootstraps systems for ansible configuration management.
 
 ## Requirements
 

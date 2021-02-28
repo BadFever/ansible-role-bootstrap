@@ -1,25 +1,11 @@
 ---
-- name: Install required packages
-  yum:
-    name:
-      - wget
-      - openssh-server
-      - vim
-    state: present
-  become: true
+- include_tasks: rhel.yml
+  when: ansible_os_family == 'RedHat'
 
-- name: Add ansible user
-  user:
-    name: "{{ bootstrap_ansible_user }}"
-    create_home: true
-    groups:
-      - wheel
-    shell: /bin/bash
-    append: true
-    state: present
-  become: true
+- include_tasks: ubuntu.yml
+  when: ansible_os_family == 'Debian'
 
-- name: Add ansible user public key
+- name: Add ansible user public key.
   authorized_key:
     user: "{{ bootstrap_ansible_user }}"
     key: "{{ bootstrap_ansible_user_ssh_public_key }}"
@@ -28,39 +14,34 @@
     exclusive: true
     state: present
   when: bootstrap_ansible_user_ssh_public_key | length > 0
-  become: true
 
-- name: Add ansible user to sudo
+- name: Add ansible user to sudo.
   lineinfile:
     path: "/etc/sudoers.d/{{ bootstrap_ansible_user }}"
     line: "{{ bootstrap_ansible_user }} ALL=(ALL) NOPASSWD: ALL"
     state: present
     mode: 0440
     create: true
-    validate: 'visudo -cf %s'
+    validate: "visudo -cf %s"
   when: bootstrap_ansible_allow_password_less_sudo | bool
-  become: true
 
-- name: Set includedir in sudoers
+- name: Set includedir in sudoers.
   lineinfile:
     dest: /etc/sudoers
     line: "#includedir /etc/sudoers.d"
     state: present
     validate: "/usr/sbin/visudo -cf %s"
   when: bootstrap_ansible_allow_password_less_sudo | bool
-  become: true
 
-- name: Check ssh config
+- name: Check ssh config.
   lineinfile:
     dest: /etc/ssh/sshd_config
     line: "PubkeyAuthentication yes"
     state: present
   notify: "Restart sshd"
-  become: true
 
-- name: Ensure sshd started
+- name: Ensure sshd started.
   service:
     name: sshd
     enabled: true
     state: started
-  become: true
