@@ -2,8 +2,8 @@
 dependencies: []
 
 galaxy_info:
-  author: b4dfever
-  description: "Packer workflow"
+  author: badfever
+  description: "Bootstrapping systems for ansible configuration management"
   license: "license (BSD, MIT)"
   min_ansible_version: 1.8
   platforms:
