@@ -16,3 +16,4 @@
     shell: /bin/bash
     append: true
     state: present
+  when: bootstrap_ansible_user | length > 0
