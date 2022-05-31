@@ -18,7 +18,7 @@
 - name: Add ansible user to sudo.
   lineinfile:
     path: "/etc/sudoers.d/{{ bootstrap_ansible_user }}"
-    line: "{{ bootstrap_ansible_user }} ALL=(ALL) NOPASSWD: ALL"
+    line: "{{ bootstrap_ansible_user }} ALL=(ALL) NOPASSWD:ALL"
     state: present
     mode: 0440
     create: true
