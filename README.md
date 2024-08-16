@@ -1,8 +1,6 @@
 # ansible-role-bootstrap
 
-[![Build Status](https://travis-ci.org/BadFever/ansible-role-bootstrap.svg?branch=master)](https://travis-ci.org/BadFever/ansible-role-bootstrap)
-
-This ansible roles bootstraps systems for ansible configuration management.
+This ansible role bootstraps systems for configuration management.
 
 ## Requirements
 
@@ -12,29 +10,21 @@ None.
 
 Available variables are listed below, along with default values (see defaults/main.yml):
 
+    bootstrap_ansible_user: ansible
+
 The ansible service user.
 
-```yaml
-bootstrap_ansible_user: ansible
-```
+    bootstrap_ansible_user_password: ""
 
-The ansible service user password:
+The ansible service user password.
 
-```yaml
-bootstrap_ansible_user_password: "ansible"
-```
+    bootstrap_ansible_user_ssh_public_key: ""
 
 The ansible service user ssh public key.
 
-```yaml
-bootstrap_ansible_user_ssh_public_key: ""
-```
+    bootstrap_ansible_allow_password_less_sudo: true
 
 Allow passwordless sudo for ansible service user.
-
-```yaml
-bootstrap_ansible_allow_password_less_sudo: true
-```
 
 ## Dependencies
 
@@ -42,11 +32,9 @@ None.
 
 ## Example Playbook
 
-```YAML
-- hosts: all
-  role:
-    - ansible-role-bootstrap
-```
+    - hosts: all
+      role:
+        - ansible-role-bootstrap
 
 ## License
 
