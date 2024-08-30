@@ -38,10 +38,10 @@
     dest: /etc/ssh/sshd_config
     line: "PubkeyAuthentication yes"
     state: present
-  notify: "Restart sshd"
+  notify: "Restart ssh service"
 
 - name: Ensure sshd started.
   service:
-    name: sshd
+    name: "{{ ssh_service_name }}"
     enabled: true
     state: started

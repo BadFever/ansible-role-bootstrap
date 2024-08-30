@@ -21,3 +21,7 @@
     append: true
     state: present
   when: bootstrap_ansible_user | length > 0
+
+- name: Set SSH Service Name
+  ansible.builtin.set_fact:
+    ssh_service_name: ssh
